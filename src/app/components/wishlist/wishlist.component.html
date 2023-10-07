@@ -1,0 +1,30 @@
+<div class="loading">
+    <div class="lds-dual-ring"></div>
+</div>
+
+<div *ngIf="wishList !=0 ;else Empty " class="bg-main-light p-4 my-5 rounded-2 ">
+        <h3 class="text-center">Your wishing List </h3>
+    <div *ngFor="let item of wishList" class="row my-5 py-2 align-items-center">
+        <div class="col-md-2">
+            <img class="w-100" [src]="item.imageCover" alt="ProductImg">
+        </div>
+        <div class="col-md-10 d-flex justify-content-between">
+            <div>
+                <h6 class="text-muted">{{item.title}}</h6>
+                <h6 class="text-main">Item Price :{{item.price }} EGP</h6>
+                <button (click)="removeFromWishList(item.id)" class="btn btn-outline-danger m-0 p-1">
+                    <i *ngIf="removeLoading" class="fas fa-spinner fa-spin"></i>
+                    <i *ngIf="!removeLoading" class="fa-regular fa-trash-can"></i>
+
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>
+<ng-template #Empty>
+    <div class="bg-main-light vh-100 d-flex justify-content-center align-items-center p-4 my-4 rounded-2 text-center">
+        <h2 class="text-muted">wishList Is Empty</h2>
+    </div>
+</ng-template>
+

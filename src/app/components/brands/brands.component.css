@@ -1,0 +1,12 @@
+.brand{
+    transition: box-shadow 0.5s;
+}
+
+.brand:hover{
+cursor: pointer;
+box-shadow: 1px 1px 5px 1px green;
+}
+
+.modal-body img{
+    height: 150px;
+}

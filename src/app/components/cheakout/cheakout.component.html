@@ -1,0 +1,19 @@
+<div class="form w-50 mx-auto py-5 mt-5 ">
+    <div class="div mt-5">
+        <form [formGroup]="shippingAddress" (ngSubmit)="getPaymentMethod()">
+            <input placeholder="details" type="text" class="form-control mb-3" formControlName="details"  id="details">
+            <input placeholder="phone" type="tel" class="form-control mb-3" formControlName="phone"  id="phone">
+            <input placeholder="city" type="text" class="form-control mb-3" formControlName="city"  id="city">
+
+            <input type="radio" name="method" value="Cash" id="cash" checked="checked">
+            <label for="cash"> Cash</label>
+            <br>
+            <input type="radio" name="method" value="Visa" id="vish">
+            <label for="visa">Visa</label>
+            <button class="btn btn-outline-success my-3 d-block ">
+                <i *ngIf="isLoading" class="fas fa-spinner fa-spin"></i>
+                <span *ngIf="!isLoading">Pay</span>
+            </button>
+        </form>
+    </div>
+</div>

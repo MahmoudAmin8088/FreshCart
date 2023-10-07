@@ -1,0 +1,42 @@
+<div class="py-4">
+    <div class="row g-5 mb-5">
+        <div> 
+            <input [(ngModel)]="term" type="text" placeholder="Search By Term" class="form-control w-75 my-4 mx-auto">
+        </div>
+        <div *ngFor="let product of products|search:term " class="col-md-3">
+            <div class="product  px-2 py-4 cursor-pointer">
+                <a [routerLink]="['/productdetails',product._id]">
+                 
+                    <img src="{{product.imageCover}}" class="w-100" alt="">
+                    <span class="text-main fw-bold font-sm">{{product.category.name}}</span>
+                    <h3 class="h6 fw-bolder">{{product.title.split(' ').slice(0,2).join(' ')}}</h3>
+                    <div class="d-flex justify-content-between align-content-center">
+                        <span class="text-muted fw-bold font-sm">{{product.price}} EGP</span>
+                        <div class="rate">
+                            <i class="fas fa-star rating-color"></i>
+                            <span class="text-muted fw-bold font-sm">{{product.ratingsAverage}}</span>
+                        </div>
+                    </div>
+
+                </a>
+                <button (click)="addToCart(product._id)" class="btn bg-main text-white w-75">
+                    <i *ngIf="isLoading" class="fas fa-spinner fa-spin"></i>
+                    <span *ngIf="!isLoading">Add</span>
+                </button>
+                <i (click)="getProductId($event)"class="fa-solid fa-heart fa-2x mx-2 heart"></i>
+                <h6 hidden>{{product._id}}</h6>
+            </div>
+        </div>
+    </div>
+</div>
+<nav class="d-flex justify-content-center" aria-label="Page navigation example">
+    <ul class="pagination">
+     
+      <li class="page-item cursor-pointer"><a class="page-link pagenum">1</a></li>
+      <li class="page-item cursor-pointer"><a class="page-link pagenum">2</a></li>
+     
+    </ul>
+  </nav>
+  <div class="loading">
+    <div class="lds-dual-ring"></div>
+</div>

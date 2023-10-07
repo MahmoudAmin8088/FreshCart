@@ -1,0 +1,50 @@
+<div class="loading">
+    <div class="lds-dual-ring"></div>
+</div>
+
+<div class="py-5">
+    <h3 class="text-center fw-bolder text-main mb-5">All Brands</h3>
+    <div class="row g-3">
+        <div *ngFor="let brand of brands" class="col-3">
+            <div data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <div  class="brand border rounded-3">
+                    <img (click)="getBrandId($event)" class="w-100" [src]="brand.image" alt="brand-img">
+                    <div hidden>{{brand._id}}</div>
+                    <h5  class="fw-bolder text-center">{{brand.name}}</h5>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 text-main fw-bolder" id="exampleModalLabel"> {{brand?.name}}</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            <img [src]="brand?.image" class="w-100" alt="brand-img">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<nav class="d-flex justify-content-center" aria-label="Page navigation example">
+    <ul class="pagination">
+
+        <li class="page-item cursor-pointer"><a class="page-link pagenum">1</a></li>
+        <li class="page-item cursor-pointer"><a class="page-link pagenum">2</a></li>
+
+    </ul>
+</nav>
+
+
+

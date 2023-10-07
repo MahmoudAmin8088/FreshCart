@@ -1,0 +1,51 @@
+
+<div class="loading">
+    <div class="lds-dual-ring"></div>
+</div>
+<div *ngIf="cartDetails !=0 ;else Empty " class="bg-main-light p-4 my-5 rounded-2 ">
+    <div class="d-flex justify-content-between align-items-center">
+        <h3>Your Cart</h3>
+        <h2 class="text-main my-3">Total Price : {{cartDetails?.totalCartPrice | currency:'LE '}}</h2>
+        <button (click)="clearCart()" class="btn btn-outline-danger">
+
+            <i *ngIf="isLoading" class="fas fa-spinner fa-spin"></i>
+            <span *ngIf="!isLoading">Clear Cart</span>
+        </button>
+    </div>
+    <div *ngFor="let product of cartDetails?.products" class="row my-5 py-2 align-items-center">
+        <div class="col-md-2">
+            <img class="w-100" [src]="product.product.imageCover" alt="ProductImg">
+        </div>
+        <div class="col-md-10 d-flex justify-content-between">
+            <div>
+                <h6 class="text-muted">{{product.product.title.split(' ').splice(0,5).join(' ')}}</h6>
+                <h6 class="text-main">Item Price :{{product.price }} EGP</h6>
+                <button (click)="removeItem(product.product._id)" class="btn btn-outline-danger m-0 p-1">
+                    <i class="fa-regular fa-trash-can"></i>
+
+                </button>
+            </div>
+            <div>
+                <button (click)="updateQuantity(product.product._id ,product.count+1 )"
+                    class="btn btn-outline-success btn-sm"><i class="fa-solid fa-plus"></i></button>
+                <span class="mx-2">{{product.count}}</span>
+                <button (click)="updateQuantity(product.product._id ,product.count-1 )"
+                    class="btn btn-outline-success btn-sm"><i class="fa-solid fa-minus"></i></button>
+            </div>
+        </div>
+    </div>
+   
+   
+
+   
+    <button  class="btn bg-main text-white ms-auto d-block">
+        <a [routerLink]="['/checkout',cartDetails?._id]">Payment</a>
+    </button>
+
+</div>
+<ng-template #Empty>
+    <div class="bg-main-light vh-100 d-flex justify-content-center align-items-center p-4 my-4 rounded-2 text-center">
+        <h2 class="text-muted">Cart Is Empty</h2>
+    </div>
+</ng-template>
+

@@ -1,0 +1,33 @@
+<div class="py-4">
+    <div *ngIf="userorders;else Empty " class="bg-main-light p-4 my-5 rounded-2 ">
+        <div class="d-flex justify-content-between align-items-center">
+            <h3>Your Orders</h3>
+            <h2 class="text-main my-3">Total Order : {{userorders?.length}}</h2>
+        </div>
+        <div *ngFor="let order of userorders" class="row my-5 py-2 text-center">
+            <div>
+                <h6>This Order Is {{order.cartItems.length}} Items</h6>
+                <h6 class="text-muted">Created At {{order.createdAt |date }}</h6>
+                <h6 class="text-main">Total Order Price :{{order.totalOrderPrice | currency:'LE ' }}</h6>
+            </div>
+
+            <div *ngFor="let item of order.cartItems" class="items col-md-2 py-3">
+                <img [src]="item.product.imageCover" class="w-100 rounded-2" alt="item Img">
+                <div class="text-muted">{{item.count}} Item</div>
+                <div class="text-muted">{{item.price | currency:' LE '}}</div>
+            </div>
+
+            <hr>
+        </div>
+
+    </div>
+    <ng-template #Empty>
+        <div
+            class="bg-main-light vh-100 d-flex justify-content-center align-items-center p-4 my-4 rounded-2 text-center">
+            <h2 class="text-muted">No Order Yet</h2>
+        </div>
+    </ng-template>
+</div>
+<div class="loading">
+    <div class="lds-dual-ring"></div>
+</div>

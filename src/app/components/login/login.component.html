@@ -1,0 +1,31 @@
+<div class="w-75 mx-auto py-5">
+    <h4>Login Now :</h4>
+    <h5 *ngIf="apiErrors" class="alert alert-danger">{{apiErrors}}</h5>
+    <h5 *ngIf="apiErr.length > 5" class="alert alert-danger">{{apiErr}}</h5>
+    <form (ngSubmit)="handleLogin(loginForm)" [formGroup]="loginForm">
+        
+        <label for="email">email :</label>
+        <input [class.is-invalid]="loginForm.get('email')?.errors && loginForm.get('email')?.touched"
+        [class.is-valid]="loginForm.get('email')?.errors == null"
+         type="text" formControlName="email" id="email" class="form-control mb-2">
+        <div *ngIf="loginForm.get('email')?.errors && loginForm.get('email')?.touched" class="alert alert-danger">
+            <p class="m-0" *ngIf="loginForm.get('email')?.getError('email')" >Email Not Valid </p>
+            <p class="m-0" *ngIf="loginForm.get('email')?.getError('required')">Email Must Be Requird</p>
+        </div>
+        <label for="password">password :</label>
+        <input [class.is-invalid]="loginForm.get('password')?.errors && loginForm.get('password')?.touched"
+        [class.is-valid]="loginForm.get('password')?.errors == null" type="password" formControlName="password" id="password" class="form-control mb-2">
+        <div *ngIf="loginForm.get('password')?.errors && loginForm.get('password')?.touched" class="alert alert-danger">
+            <p class="m-0" *ngIf="loginForm.get('password')?.getError('required')">Password is Requird</p>
+            <p class="m-0" *ngIf="loginForm.get('password')?.getError('pattern')">Password is NotValid</p>
+        </div>
+
+        <a class="text-primary" routerLink="/forgetpassword">Forget Password.....</a>
+        
+        <button [disabled]="loginForm.invalid" type="submit" class="btn btn-success ms-auto d-block">
+            <i *ngIf="isLoading" class="fas fa-spinner fa-spin"></i>
+            <span *ngIf="!isLoading">Login</span>
+        </button>
+        <!-- <button [disabled]="registerForm.invalid" type="submit" class="btn bg-main border-0 ms-auto d-block">Register</button> -->
+    </form>
+</div>
